@@ -44,6 +44,9 @@ UHWR_IMAGES_DIR = str(Path(UHWR_ROOT) / "Dataset" / "images")
 UPTI_IMG_ZIP = str(DATA_ROOT / "images_upti2_2.zip")
 UPTI_LBL_ZIP = str(DATA_ROOT / "groundtruth_upti2.zip")
 
+# Sample line images used by the figure scripts in figures/
+TEST_IMAGE_DIR = str(DATA_ROOT / "TestProject" / "Dataset" / "images")
+
 # Convenience string form of the root (used where a base_path string is expected)
 DATA_ROOT_STR = str(DATA_ROOT)
 

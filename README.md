@@ -44,6 +44,7 @@ pipeline_export/
 ├── stage4_recognizer/           BiLSTM-CTC model + the PathBExtractor orchestrator
 ├── stage5_two_stage_training/   synthetic generation, pretrain, fine-tune
 ├── coverage_analysis/           character + ligature coverage (Naeem et al.)
+├── figures/                     end-to-end + per-stroke thesis figure scripts
 ├── checkpoints/                 all trained weights + k-means vocab
 └── common/                      shared dependencies imported across stages
 ```
