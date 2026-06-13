@@ -37,7 +37,12 @@ a 24% relative improvement over the 27.9% real-only training baseline.
 ## Folder layout
 
 ```
-pipeline_export/
+SyntheticStrokeTrajectory/
+├── config.py                    central path config (driven by STROKE_DATA_ROOT)
+├── setup_env.sh                 sets PYTHONPATH + data root (source before running)
+├── verify_results.py            one-command headline check (reproduces 21.3% CER)
+├── requirements.txt             pinned dependencies
+├── README.md / REPRODUCE.md     overview / step-by-step reproduction guide
 ├── stage1_unet_segmentation/    U-Net architecture, training, inference, eval
 ├── stage2_trajectory_recovery/  mask → ordered point sequence
 ├── stage3_order_predictor/      shape embedding + learned stroke ordering
