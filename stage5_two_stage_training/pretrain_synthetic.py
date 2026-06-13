@@ -185,7 +185,7 @@ def main():
     # ---- Resume from checkpoint if requested ----
     if args.resume is not None:
         print(f"[pretrain] resuming from {args.resume}")
-        ck = torch.load(args.resume, map_location=device)
+        ck = torch.load(args.resume, map_location=device, weights_only=False)
         model.load_state_dict(ck["state_dict"])
         if "optim_state" in ck:
             optim.load_state_dict(ck["optim_state"])

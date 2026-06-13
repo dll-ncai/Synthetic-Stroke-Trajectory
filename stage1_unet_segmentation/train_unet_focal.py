@@ -152,7 +152,7 @@ def main():
     print(f"[train-focal] model params: {count_parameters(model):,}")
 
     if args.init_from is not None and Path(args.init_from).exists():
-        ck = torch.load(args.init_from, map_location=device)
+        ck = torch.load(args.init_from, map_location=device, weights_only=False)
         model.load_state_dict(ck["state_dict"])
         print(f"[train-focal] warm-started from {args.init_from}")
 

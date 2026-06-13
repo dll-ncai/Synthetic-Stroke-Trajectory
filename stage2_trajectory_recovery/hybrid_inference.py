@@ -209,7 +209,7 @@ def load_classifier(ckpt_path: Path,
                     device: str = "cpu") -> StrokeCNNClassifier:
     """Convenience: load Phase 7 scratch CNN classifier from checkpoint."""
     model = StrokeCNNClassifier(n_classes=n_classes, hidden=hidden, dropout=0.0)
-    state = torch.load(ckpt_path, map_location=device)
+    state = torch.load(ckpt_path, map_location=device, weights_only=False)
     model.load_state_dict(state)
     model.eval()
     model.to(device)

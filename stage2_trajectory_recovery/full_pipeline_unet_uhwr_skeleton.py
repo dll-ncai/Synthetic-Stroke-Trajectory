@@ -335,7 +335,7 @@ def main():
     print(f"[uhwr-skel] device={device}")
 
     unet = StrokeUNet(n_classes=3, base_ch=16).to(device)
-    ck = torch.load(args.unet_ckpt, map_location=device)
+    ck = torch.load(args.unet_ckpt, map_location=device, weights_only=False)
     unet.load_state_dict(ck["state_dict"])
     unet.eval()
     print(f"[uhwr-skel] U-Net loaded from {args.unet_ckpt}")
@@ -343,7 +343,7 @@ def main():
     vocab = np.load(Path(args.vocab_dir) / "vocab.npz")
     K_total = int(vocab["k_total"]) if "k_total" in vocab.files else int(vocab["k"]) + 1
     classifier = StrokeCNNClassifier(n_classes=K_total, hidden=256, dropout=0.0).to(device)
-    classifier.load_state_dict(torch.load(args.classifier_ckpt, map_location=device))
+    classifier.load_state_dict(torch.load(args.classifier_ckpt, map_location=device, weights_only=False))
     classifier.eval()
     extractor = make_embedding_extractor(classifier)
 

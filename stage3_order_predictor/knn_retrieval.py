@@ -179,7 +179,7 @@ def build_knn_index(
     classifier = StrokeCNNClassifier(
         n_classes=K_total, hidden=256, dropout=0.0,
     ).to(device)
-    state = torch.load(ckpt_path, map_location=device)
+    state = torch.load(ckpt_path, map_location=device, weights_only=False)
     classifier.load_state_dict(state)
     extractor = make_embedding_extractor(classifier)
 
@@ -451,7 +451,7 @@ def main():
     classifier = StrokeCNNClassifier(
         n_classes=K_total, hidden=256, dropout=0.0,
     ).to(device)
-    state = torch.load(args.ckpt, map_location=device)
+    state = torch.load(args.ckpt, map_location=device, weights_only=False)
     classifier.load_state_dict(state)
     extractor = make_embedding_extractor(classifier)
 

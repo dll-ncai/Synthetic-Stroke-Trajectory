@@ -143,7 +143,7 @@ def main():
     print(f"[uhwr] device={device}")
 
     model = StrokeUNet(n_classes=3, base_ch=16).to(device)
-    ckpt = torch.load(args.ckpt, map_location=device)
+    ckpt = torch.load(args.ckpt, map_location=device, weights_only=False)
     model.load_state_dict(ckpt["state_dict"])
     model.eval()
     print(f"[uhwr] loaded checkpoint: {args.ckpt}")

@@ -190,7 +190,7 @@ def main():
     # ---- Resume ----
     if args.resume is not None:
         print(f"[resume] loading checkpoint: {args.resume}")
-        ck = torch.load(args.resume, map_location=device)
+        ck = torch.load(args.resume, map_location=device, weights_only=False)
         model.load_state_dict(ck["state_dict"])
         if "optim_state" in ck:
             optim.load_state_dict(ck["optim_state"])

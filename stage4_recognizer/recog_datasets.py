@@ -144,7 +144,7 @@ class PathBExtractor:
                  knn_index: Optional[str] = None):
         self.device = device
         self.unet = StrokeUNet(n_classes=3, base_ch=16).to(device)
-        ck = torch.load(unet_ckpt, map_location=device)
+        ck = torch.load(unet_ckpt, map_location=device, weights_only=False)
         self.unet.load_state_dict(ck["state_dict"])
         self.unet.eval()
         self.thresh_interior = thresh_interior
@@ -168,7 +168,7 @@ class PathBExtractor:
                     n_classes=K_total, hidden=256, dropout=0.0,
                 ).to(device)
                 self.classifier.load_state_dict(
-                    torch.load(classifier_ckpt, map_location=device),
+                    torch.load(classifier_ckpt, map_location=device, weights_only=False),
                 )
                 self.classifier.eval()
                 self.extractor_fn = make_embedding_extractor(self.classifier)

@@ -146,7 +146,7 @@ def main():
     char_to_idx = load_vocab(args.vocab)
     V = len(char_to_idx) + 1
     model = TrajRecognizer(vocab_size_with_blank=V, input_dim=3).to(device)
-    ck = torch.load(args.ckpt, map_location=device)
+    ck = torch.load(args.ckpt, map_location=device, weights_only=False)
     model.load_state_dict(ck["state_dict"])
     model.eval()
     if "best_val_cer" in ck:
