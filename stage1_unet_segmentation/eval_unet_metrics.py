@@ -101,6 +101,13 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--n-samples", type=int, default=100,
                         help="number of val samples to evaluate (0 = all)")
+    # Rasterization thickness of the GT, in px. Must match the checkpoint:
+    # deployment U-Net (unet_phase2_thinner) -> 2 3  (per-instance IoU 0.879);
+    # broad phase-1 U-Net (unet_phase1_broad) -> 3 7 (per-instance IoU 0.750).
+    parser.add_argument("--thickness", type=int, nargs=2, default=[2, 3],
+                        metavar=("MIN", "MAX"),
+                        help="GT stroke thickness range in px (default 2 3, "
+                             "matching the deployment U-Net)")
     parser.add_argument("--thresh-interior", type=float, default=0.4)
     parser.add_argument("--thresh-boundary", type=float, default=0.7)
     parser.add_argument("--min-area", type=int, default=2)
@@ -119,8 +126,10 @@ def main():
                                              seed=args.seed)
     if args.n_samples > 0:
         val_idx = val_idx[:args.n_samples]
-    val_ds = StrokeSegDataset(base, augment=False, seed=args.seed)
-    print(f"[eval] evaluating on {len(val_idx)} val samples")
+    val_ds = StrokeSegDataset(base, augment=False, seed=args.seed,
+                              thickness_range=tuple(args.thickness))
+    print(f"[eval] evaluating on {len(val_idx)} val samples "
+          f"(GT thickness {tuple(args.thickness)} px)")
 
     cls_iou = [[] for _ in range(3)]
     cls_prec = [[] for _ in range(3)]

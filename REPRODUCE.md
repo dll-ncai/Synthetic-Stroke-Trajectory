@@ -98,6 +98,24 @@ python3 figures/visualize_end_to_end_sample.py   # input -> 3-class -> instances
 python3 figures/visualize_stroke_detail.py       # per-stroke skeleton -> walk -> resample
 ```
 
+## 3c. Reproduce the Stage 1 segmentation metric (optional)
+
+```bash
+python3 stage1_unet_segmentation/eval_unet_metrics.py --n-samples 100
+```
+
+Reports per-instance IoU for the U-Net. **The GT rasterization thickness must
+match the checkpoint** (`--thickness MIN MAX`):
+
+| Checkpoint | thickness | per-instance IoU |
+|---|---|---|
+| `unet_phase2_thinner.pt` (deployment, default) | `2 3` | **0.879** |
+| `unet_phase1_broad.pt` | `3 7` | 0.750 |
+
+The default is `2 3` (deployment), so the headline 0.879 reproduces out of the
+box. Evaluating the thin deployment model against thick (`3 7`) GT understates
+IoU (~0.65) — match the thickness to the model.
+
 ## 4. Reproduce the full training pipeline (optional, slow)
 
 Requires the full corpora and regenerating the synthetic cache.
