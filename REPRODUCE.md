@@ -61,6 +61,33 @@ Expected output:
 split using the ground-truth online trajectories — the same final evaluation
 `finetune_real_3way.py` performs after training.
 
+## 3a. Reproduce the full results table
+
+```bash
+python3 reproduce_table.py
+```
+
+Reproduces all three rows on the same held-out test split:
+
+```
+Training Setup                           recipe    reported  reproduced
+Synthetic pretrain only (zero-shot)      cleaned   0.783     0.783
+Real-only baseline                       raw       0.281     0.279
+Synthetic pretrain + fine-tune (ours)    cleaned   0.213     0.213
+```
+
+> **Trajectory recipe (`STROKE_SIMPLIFY`).** The recognizer can be fed either
+> raw tablet trajectories or *simplified* ones (uniform arc-length resampling +
+> light smoothing), controlled by the `STROKE_SIMPLIFY` env var (default `1` =
+> on). The two-stage model is trained and evaluated on **simplified**
+> trajectories — this matches the geometry-only domain of the synthetic
+> pretraining data. The **real-only baseline** was trained on **raw**
+> trajectories, so it is evaluated the same way (`STROKE_SIMPLIFY=0`) to
+> reproduce its reported CER. `reproduce_table.py` selects the correct recipe
+> per row automatically; to reproduce a single row by hand, set the env var to
+> match (e.g. `STROKE_SIMPLIFY=0 python3 verify_results.py --ckpt
+> checkpoints/recognizer_realonly_baseline.pt`).
+
 ## 3b. Regenerate the pipeline figures (optional)
 
 These run the full Stage 1–4 pipeline on a bundled sample image

@@ -8,6 +8,7 @@ All datasets yield: (tokens, text_ids, n_tokens, n_text)
 
 from __future__ import annotations
 
+import os
 import sys
 import zipfile
 from pathlib import Path
@@ -57,9 +58,13 @@ from traj_tokenizer import (
 ONLINE_TARGET_STEP = 0.117
 
 # Whether to apply trajectory simplification (uniform spacing + light
-# smoothing). Set this flag to enable BOTH online (during training) and
-# Path B (during inference) cleanup so the styles converge.
-APPLY_SIMPLIFICATION = True
+# smoothing). Enables BOTH online (during training) and Path B (during
+# inference) cleanup so the styles converge.
+#
+# Selectable via the STROKE_SIMPLIFY env var (default on). The real-only
+# baseline checkpoint was trained on RAW trajectories, so reproduce its
+# reported CER with STROKE_SIMPLIFY=0; the two-stage model uses the default.
+APPLY_SIMPLIFICATION = os.environ.get("STROKE_SIMPLIFY", "1").lower() not in ("0", "false", "no")
 
 
 # ----------------------------------------------------------------------
