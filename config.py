@@ -57,6 +57,10 @@ DATA_ROOT_STR = str(DATA_ROOT)
 # ---------------------------------------------------------------------------
 CKPT_DIR = Path(__file__).resolve().parent / "checkpoints"
 
+# Sample line images bundled with the repo so the figure scripts run out of the
+# box (no external dataset needed). For the full corpus, use TEST_IMAGE_DIR.
+SAMPLE_IMAGE_DIR = str(Path(__file__).resolve().parent / "figures" / "sample_images")
+
 # Stage 1 U-Net
 UNET_PHASE1_BROAD = str(CKPT_DIR / "unet_phase1_broad.pt")          # warm-start / broad
 UNET_DEPLOY = str(CKPT_DIR / "unet_phase2_thinner.pt")             # deployment (inference/eval)

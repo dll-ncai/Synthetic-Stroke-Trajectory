@@ -61,6 +61,16 @@ Expected output:
 split using the ground-truth online trajectories — the same final evaluation
 `finetune_real_3way.py` performs after training.
 
+## 3b. Regenerate the pipeline figures (optional)
+
+These run the full Stage 1–4 pipeline on a bundled sample image
+(`figures/sample_images/`), so they need no external data:
+
+```bash
+python3 figures/visualize_end_to_end_sample.py   # input -> 3-class -> instances -> trajectory
+python3 figures/visualize_stroke_detail.py       # per-stroke skeleton -> walk -> resample
+```
+
 ## 4. Reproduce the full training pipeline (optional, slow)
 
 Requires the full corpora and regenerating the synthetic cache.

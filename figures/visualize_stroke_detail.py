@@ -65,7 +65,7 @@ from visualize_end_to_end_sample import (
     smooth_polyline,
 )
 
-DEFAULT_IMAGE = Path(config.TEST_IMAGE_DIR) / "00100.jpg"
+DEFAULT_IMAGE = Path(config.SAMPLE_IMAGE_DIR) / "00100.jpg"
 
 
 def build_components(inst: np.ndarray, min_area: int) -> List[Dict]:

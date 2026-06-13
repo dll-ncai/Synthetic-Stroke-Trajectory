@@ -64,7 +64,7 @@ from vocab_loader import decode_ids, load_vocab
 from test_uhwr import preprocess_uhwr_image
 
 
-DEFAULT_IMAGE_DIR = Path(config.TEST_IMAGE_DIR)
+DEFAULT_IMAGE_DIR = Path(config.SAMPLE_IMAGE_DIR)
 DEFAULT_IMAGE = DEFAULT_IMAGE_DIR / "00063.jpg"
 DEFAULT_VOCAB = Path(config.RECOG_VOCAB_JSON)
 VOCAB_NPZ = Path(config.VOCAB_DIR_K100) / "vocab.npz"
